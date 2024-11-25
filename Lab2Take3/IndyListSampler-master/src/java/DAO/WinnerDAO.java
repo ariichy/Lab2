@@ -24,7 +24,7 @@ public interface WinnerDAO {
      * database.
      * @throws SQLException
      */
-    public List<IndyWinner> getWinners(int offset, int limit) throws SQLException;
+    List<IndyWinner> getWinners(int offset, int limit) throws SQLException;
 
     /**
      * This method represents a way to get the total row count from the database
@@ -32,5 +32,26 @@ public interface WinnerDAO {
      * @return The total row count from the database.
      * @throws SQLException
      */
-    public int getTotalCount() throws SQLException;
+    int getTotalCount() throws SQLException;
+
+    /**
+     * This method is to be used for inserting an Indy Winner into the database
+     * @param winner The IndyWinner object with the attributes set
+     */
+    void insertWinner(IndyWinner winner);
+
+    /**
+     * This method is used to update an existing winner by setting its attributes
+     * and specifying the year you want to update.
+     * @param year The year of the winner you are updating
+     * @param winner The updated IndyWinner object
+     */
+    void updateWinner(int year, IndyWinner winner);
+
+    /**
+     * This method is for deleting IndyWinners from the database, done so
+     * by specifying the year of the winner you wish to delete.
+     * @param year The year of the winner you want to remove.
+     */
+    void deleteWinner(int year);
 }

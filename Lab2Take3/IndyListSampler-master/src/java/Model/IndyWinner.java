@@ -12,6 +12,8 @@ public class IndyWinner {
     private double averageSpeed; // average car speed
     private String country; // country the driver is from
 
+    public IndyWinner() {}
+
     /**
      * Constructor for the {@code IndyWinner} object that requires all
      * properties to be provided.
@@ -28,22 +30,37 @@ public class IndyWinner {
     }
 
     /*
-    Getters for the IndyWinner attributes
+    Getters and setters for the IndyWinner attributes
      */
     public int getYear() {
         return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getDriver() {
         return driver;
     }
 
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
     public double getAverageSpeed() {
         return averageSpeed;
     }
 
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
+    }
+
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     /**

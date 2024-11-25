@@ -50,6 +50,78 @@ public class IndyWinnerDAO implements WinnerDAO {
     }
 
     /**
+     * This method is for updating IndyWinners within the indywinners database
+     * by specifying the year you want to update, and providing the updated
+     * {@code IndyWinner} object.
+     * @param year The year of the winner you are updating
+     * @param winner The updated IndyWinner object
+     */
+    @Override
+    public void updateWinner(int year, IndyWinner winner) {
+        PreparedStatement stmt;
+        try {
+            winner.setYear(year);
+            String sql = "UPDATE indywinners SET driver = ?, averagespeed = ?, country = ? WHERE year = ?";
+            stmt = DBConnection.getInstance().getConnection().prepareStatement(sql);
+            stmt.setString(1, winner.getDriver());
+            stmt.setDouble(2, winner.getAverageSpeed());
+            stmt.setString(3, winner.getCountry());
+            stmt.setInt(4, year);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
+    /**
+     * This method is to delete {@code IndyWinner} objects from the database, done so
+     * by specifying the year of the winner you want to delete.
+     * @param year The year of the winner you want to remove.
+     */
+    @Override
+    public void deleteWinner(int year) {
+        try {
+            String query = "DELETE FROM indywinners WHERE year = ?";
+            PreparedStatement stmt = DBConnection.getInstance().getConnection().prepareStatement(query);
+            stmt.setInt(1, year);
+            stmt.executeUpdate();
+            // ResultSet result = stmt.executeQuery(query);
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method is for inserting new {@code IndyWinner} objects into
+     * the indywinners database.
+     * @param winner The IndyWinner object with the attributes set
+     */
+    @Override
+    public void insertWinner(IndyWinner winner) {
+
+        PreparedStatement stmt;
+
+        try {
+            String sql = "INSERT INTO indywinners (year, driver, averagespeed, country) values (?, ?, ?, ?)";
+            stmt = DBConnection.getInstance().getConnection().prepareStatement(sql);
+
+            stmt.setInt(1,winner.getYear());
+            stmt.setString(2, winner.getDriver());
+            stmt.setDouble(3, winner.getAverageSpeed());
+            stmt.setString(4, winner.getCountry());
+            stmt.executeUpdate();
+
+            System.out.println("Inserted Driver: " + winner);
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
+    /**
      * This method executes a query to retrieve the count of rows in
      * the indywinners table.
      * @return the number of rows in the indywinners table
